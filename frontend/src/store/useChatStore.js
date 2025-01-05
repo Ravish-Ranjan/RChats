@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { axiosInstance } from "../libs/axios";
+import { useAuthStore } from "./useAuthStore";
 
 export const useChatStore = create((set, get) => ({
     messages: [],
@@ -34,7 +35,6 @@ export const useChatStore = create((set, get) => ({
             set({ isMessagesLoading: false });
         }
     },
-    // todo optimize
     setSelectedUser: (selUser) => {
         set({ selectedUser: selUser });
     },
@@ -52,5 +52,20 @@ export const useChatStore = create((set, get) => ({
         } finally {
             set({ isSendingMessage: false });
         }
+    },
+    subToMessage: () => {
+        const { selectedUser } = get();
+        if (!selectedUser) return;
+        const socket = useAuthStore.getState().socket;
+        socket.on("recievedMessage", (newMessage) => {
+            const isMessageSentFromSelecteduser =
+                newMessage.senderId === selectedUser._id;
+            if (!isMessageSentFromSelecteduser) return;
+            set({ messages: [...get().messages, newMessage] });
+        });
+    },
+    unSubToMessage: () => {
+        const socket = useAuthStore.getState().socket;
+        socket.off("recievedMessage");
     },
 }));

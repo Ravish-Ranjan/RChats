@@ -8,9 +8,9 @@ import fileUpload from "express-fileupload";
 import authRouter from "./routers/auth.router.js";
 import messageRouter from "./routers/message.router.js";
 import connectDb from "./libs/connectDb.js";
+import { app, server } from "./libs/socket.js";
 
 dotenv.config();
-const app = express();
 
 app.use(express.json({ limit: "50mb" }));
 app.use(
@@ -33,7 +33,7 @@ app.use(
 app.use("/api/auth", authRouter);
 app.use("/api/message", messageRouter);
 
-app.listen(process.env.PORT, () => {
+server.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
     connectDb();
 });

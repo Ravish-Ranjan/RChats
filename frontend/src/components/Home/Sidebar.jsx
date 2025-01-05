@@ -1,18 +1,23 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useChatStore } from "../../store/useChatStore";
 import { useAuthStore } from "../../store/useAuthStore";
 import { User } from "@blueprintjs/icons";
-import { Button } from "@blueprintjs/core";
+import { Button, Checkbox } from "@blueprintjs/core";
 import PropTypes from "prop-types";
 
 function Sidebar({ addToast }) {
     const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } =
         useChatStore();
+    const [showOnline, setShowOnline] = useState(false);
     const { onlineUsers } = useAuthStore();
+
     useEffect(() => {
         getUsers(addToast);
-    }, [getUsers,addToast]);
+    }, [getUsers, addToast]);
 
+    const filterdUser = showOnline
+        ? users.filter((user) => onlineUsers.includes(user._id))
+        : users;
     useEffect(() => {}, [selectedUser]);
 
     return (
@@ -29,9 +34,18 @@ function Sidebar({ addToast }) {
                     </span>
                 </div>
                 {/* Online filter */}
+                <div className="mt-3 hidden lg:flex items-center gap-2">
+                    <label className="cursor-pointer flex items-center gap-2">
+                        <Checkbox
+                            onChange={(e) => setShowOnline(e.target.checked)}
+                        >
+                            Show Online Only ({onlineUsers.length - 1} online)
+                        </Checkbox>
+                    </label>
+                </div>
             </div>
-            <div className="overflow-y-auto py-3">
-                {users.map((user) => {
+            <div className="overflow-y-auto py-3 items-center flex flex-col">
+                {filterdUser.map((user) => {
                     return (
                         <Button
                             key={user._id}
@@ -72,6 +86,9 @@ function Sidebar({ addToast }) {
                         </Button>
                     );
                 })}
+                {filterdUser.length === 0 && (
+                    <span className="text-center font-semibold mx-auto text-gray-700">No Online Users</span>
+                )}
             </div>
         </aside>
     );

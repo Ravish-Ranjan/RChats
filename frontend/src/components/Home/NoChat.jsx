@@ -1,4 +1,5 @@
 import { Chat } from "@blueprintjs/icons";
+import PropTypes from "prop-types";
 
 function NoChat({ content }) {
     return (
@@ -11,6 +12,6 @@ function NoChat({ content }) {
     );
 }
 NoChat.propTypes = {
-    content: String,
+    content: PropTypes.string,
 };
 export default NoChat;

@@ -181,12 +181,27 @@ function MessageInput({ addToast }) {
 }
 
 function ChatContainer({ addToast }) {
-    const { selectedUser, messages, getMessages, isMessagesLoading } =
-        useChatStore();
+    const {
+        selectedUser,
+        messages,
+        getMessages,
+        isMessagesLoading,
+        subToMessage,
+        unSubToMessage,
+    } = useChatStore();
+    const messageEndRef = useRef(null);
 
     useEffect(() => {
         getMessages(selectedUser._id, addToast);
-    }, [getMessages, selectedUser._id, addToast]);
+        subToMessage();
+        return () => unSubToMessage();
+    }, [getMessages, selectedUser._id, addToast, subToMessage, unSubToMessage]);
+
+    useEffect(() => {
+        if (messageEndRef.current && messages) {
+            messageEndRef.current?.scrollIntoView({ behaviour: "smooth" });
+        }
+    }, [messages]);
 
     return (
         <div
@@ -217,6 +232,7 @@ function ChatContainer({ addToast }) {
                         }
                         w-full grid items-center
                         `}
+                            ref={messageEndRef}
                         >
                             <span
                                 className={`
