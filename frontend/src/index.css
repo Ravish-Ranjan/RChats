@@ -1,0 +1,72 @@
+/* :root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+} */
+@import "normalize.css";
+@import "@blueprintjs/core/lib/css/blueprint.css";
+@import "@blueprintjs/icons/lib/css/blueprint-icons.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    /* outline: 1px solid limegreen; */
+}
+
+@keyframes burp {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+.burping{
+  animation: burp 2s linear infinite;
+}
+.burping:nth-of-type(2),
+.burping:nth-of-type(4){
+  animation-delay: 0.3s;
+}
+
+.burping:nth-of-type(3),
+.burping:nth-of-type(5),
+.burping:nth-of-type(7){
+  animation-delay: 0.6s;
+}
+
+.burping:nth-of-type(6),
+.burping:nth-of-type(8){
+  animation-delay: 0.9s;
+}
+
+.burping:nth-of-type(9){
+  animation-delay: 1.2s;
+}
+
