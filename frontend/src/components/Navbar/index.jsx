@@ -4,61 +4,100 @@ import {
     OverlayToaster,
     Position,
     Toast2,
+    Popover,
+    Menu,
+    MenuItem,
+    MenuDivider,
 } from "@blueprintjs/core";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store/useAuthStore";
 
-function Nav({ toasts, toaster,addToast }) {
-    const { user,logout } = useAuthStore();
+function Nav({ toasts, toaster, addToast }) {
+    const { user, logout } = useAuthStore();
     const navigate = useNavigate();
 
     const handleLogout = () => {
         logout(addToast);
-    }
+    };
 
     return (
-        <Navbar className="h-15">
-            <Navbar.Group>
-                <Navbar.Heading>RChats</Navbar.Heading>
-                <Navbar.Divider />
-                <Button
-                    className="bp5-minimal"
-                    icon="home"
-                    text="Home"
-                    onClick={() => navigate("/")}
-                />
-                {user ? (
-                    <Button
-                        className="bp5-minimal"
-                        icon="log-out"
-                        text="Logout"
-                        onClick={handleLogout}
+        <Navbar
+            className="flex h-16 justify-between items-center bg-indigo-300"
+            // fixedToTop={true}
+        >
+            <Navbar.Heading
+                onClick={() => navigate("/")}
+                className="cursor-pointer mr-auto font-semibold"
+            >
+                Blueprint
+            </Navbar.Heading>
+            {user ? (
+                <>
+                    <Popover
+                        placement="bottom"
+                        content={
+                            <Menu>
+                                <MenuItem
+                                    icon="cog"
+                                    text="Profile"
+                                    onClick={() => navigate("/profile")}
+                                />
+                                <MenuDivider />
+                                <MenuItem
+                                    icon="log-out"
+                                    text="Logout"
+                                    onClick={() => handleLogout()}
+                                />
+                            </Menu>
+                        }
+                    >
+                        <Button
+                            alignText="left"
+                            icon="applications"
+                            className="rounded-lg"
+                            rightIcon="caret-down"
+                            text={user.fullname}
+                        />
+                    </Popover>
+                    <img
+                        src={
+                            user.profilepic ||
+                            "https://api.iconify.design/material-symbols:account-circle.svg?color=%23888888"
+                        }
+                        alt="Profile Picture"
+                        className="h-4/5 ml-2 bg-white aspect-square rounded-full object-cover p-1 "
                     />
-                ) : (
-                    <>
-                        <Button
-                            className="bp5-minimal"
-                            icon="new-person"
-                            text="Signup"
-                            onClick={() => navigate("/signup")}
-                        />
-                        <Button
-                            className="bp5-minimal"
-                            icon="log-in"
-                            text="Login"
-                            onClick={() => navigate("/login")}
-                        />
-                    </>
-                )}
-            </Navbar.Group>
+                </>
+            ) : (
+                <>
+                    <Button
+                        alignText="left"
+                        icon="applications"
+                        text="Signup"
+                        intent="secondary"
+                        minimal={true}
+                        onClick={() => navigate("/signup")}
+                        className="mx-2"
+                    />
+                    <Button
+                        alignText="left"
+                        icon="applications"
+                        text="Login"
+                        intent="secondary"
+                        minimal={true}
+                        onClick={() => navigate("/login")}
+                        className="mx-2"
+                    />
+                </>
+            )}
             <OverlayToaster
-                position={Position.TOP_RIGHT}
+                position={Position.TOP}
                 ref={toaster}
                 maxToasts={5}
             >
                 {toasts.map((toast) => (
-                    <Toast2 key={toast.key} {...toast} />
+                    <Toast2 key={toast.key} {...toast} minimal={true} />
                 ))}
             </OverlayToaster>
         </Navbar>

@@ -34,7 +34,7 @@ function App() {
         );
     }
     return (
-        <div className="h-dvh flex flex-col">
+        <div className="min-h-dvh flex flex-col overflow-y-auto">
             <Navbar toasts={toasts} toaster={toaster} addToast={addToast} />
             <Routes>
                 <Route

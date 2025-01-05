@@ -6,10 +6,12 @@ export const useAuthStore = create((set) => ({
     isSigningUp: false,
     isLoggingIn: false,
     isCheckingAuth: true,
+    isChangingPic: false,
+    onlineUsers:[],
     checkAuth: async () => {
         try {
             const res = await axiosInstance.get("/auth/authenticated");
-            set({ user: res.data });
+            set({ user: res.data.user });
         } catch (error) {
             console.log("Error ", error);
             set({ user: null });
@@ -35,10 +37,11 @@ export const useAuthStore = create((set) => ({
         try {
             const res = await axiosInstance.post("/auth/login", form);
             set({ user: res.data.user });
+            console.log(res.data.user);
             addToast("Logged In Successfully", "success");
         } catch (error) {
             console.log("Error", error);
-            addToast(error.response.data.message, "danger");
+            addToast(error, "danger");
         } finally {
             set({ isLogginIn: false });
         }
@@ -51,6 +54,19 @@ export const useAuthStore = create((set) => ({
         } catch (error) {
             console.log("Error", error);
             addToast(error.response.data.message, "danger");
+        }
+    },
+    changepic: async (data, addToast) => {
+        set({ isChangingPic: true });
+        try {
+            const res = await axiosInstance.put("/auth/changeprofilepic", data);
+            set({ user: res.data.user });
+            addToast("Profile picture changed successfully","success");
+        } catch (error) {
+            console.log("Error", error);
+            addToast(error.response.data.message, "danger");
+        } finally {
+            set({ isChangingPic: false });
         }
     },
 }));

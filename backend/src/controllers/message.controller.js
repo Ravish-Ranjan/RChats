@@ -54,7 +54,7 @@ export const sendMessage = async (req, res) => {
         }
         if (content) newMessage.content = content;
         if (image) {
-            const cloudRes = await cloudinary.uploader.upload(profilepic);
+            const cloudRes = await cloudinary.uploader.upload(image);
             newMessage.image = cloudRes.secure_url;
         }
         const message = new Message(newMessage);

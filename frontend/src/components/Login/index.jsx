@@ -42,7 +42,7 @@ function Login({ addToast }) {
     };
 
     return (
-        <div className="h-full w-full flex justify-evenly items-center bg-indigo-300">
+        <div className="w-full flex justify-evenly items-center bg-indigo-300 relative" style={{height:"calc(100dvh - 4rem)"}}>
             <form
                 method="post"
                 className="h-5/6 bg-gray-200 mx-10 p-2 flex flex-col gap-6 rounded-xl"

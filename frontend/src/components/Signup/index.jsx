@@ -1,21 +1,21 @@
 import { Button, FormGroup, InputGroup } from "@blueprintjs/core";
 import { useState } from "react";
 import { useAuthStore } from "../../store/useAuthStore";
-import AnimateBox from "../AnimateBox/index.jsx"
+import AnimateBox from "../AnimateBox/index.jsx";
 import PropTypes from "prop-types";
 
-function Signup({addToast}) {
+function Signup({ addToast }) {
     const [form, setForm] = useState({
         fullname: "",
         email: "",
         password: "",
     });
     const [visi, setVisi] = useState(false);
-    const {signup,isSigningUp} = useAuthStore();
+    const { signup, isSigningUp } = useAuthStore();
 
     const validate = () => {
         let allcorrect = true;
-        if (!form.fullname){
+        if (!form.fullname) {
             addToast("Full Name is required", "warning");
             allcorrect = false;
         }
@@ -23,7 +23,7 @@ function Signup({addToast}) {
             addToast("Email field is required", "warning");
             allcorrect = false;
         }
-        if (form.email && !/\S+@\S+\.\S+/.test(form.email)){
+        if (form.email && !/\S+@\S+\.\S+/.test(form.email)) {
             addToast("Not a valid email", "warning");
             allcorrect = false;
         }
@@ -31,7 +31,7 @@ function Signup({addToast}) {
             addToast("Password field is required", "warning");
             allcorrect = false;
         }
-        if (form.password && form.password.length <8){
+        if (form.password && form.password.length < 8) {
             addToast("Password should be 8 chareacters or more", "warning");
             allcorrect = false;
         }
@@ -40,14 +40,16 @@ function Signup({addToast}) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (validate()){
-            signup(form,addToast)
+        if (validate()) {
+            signup(form, addToast);
         }
-        
     };
 
     return (
-        <div className="h-full w-full flex justify-evenly items-center bg-indigo-300">
+        <div
+            className="h-full w-full flex flex-row-reverse justify-evenly items-center bg-indigo-300 relative"
+            style={{ height: "calc(100dvh - 4rem)" }}
+        >
             <form
                 method="post"
                 className="h-5/6 bg-gray-200 mx-10 p-2 flex flex-col gap-6 rounded-xl"

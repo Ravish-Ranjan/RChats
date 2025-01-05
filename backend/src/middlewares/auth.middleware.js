@@ -20,6 +20,7 @@ export const authenticated = async (req, res, next) => {
             fullname: user.fullname,
             email: user.email,
             profilepic: user.profilepic,
+            createdAt: user.createdAt,
         };
         next();
     } catch (error) {

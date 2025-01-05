@@ -36,6 +36,7 @@ export const signup = async (req, res) => {
                     fullname: newUser.fullname,
                     email: newUser.email,
                     profilepic: newUser.profilepic,
+                    createdAt: newUser.createdAt,
                 },
             });
         }
@@ -68,6 +69,7 @@ export const login = async (req, res) => {
                 fullname: user.fullname,
                 email: user.email,
                 profilepic: user.profilepic,
+                createdAt: user.createdAt,
             },
         });
     } catch (error) {
@@ -109,6 +111,7 @@ export const changeProfilePic = async (req, res) => {
                     fullname: user.fullname,
                     email: user.email,
                     profilepic: user.profilepic,
+                    createdAt: user.createdAt,
                 },
             });
         } else {
