@@ -1,0 +1,35 @@
+{
+    "short_name": "RChats",
+    "name": "RChat - A Real-Time Chat App",
+    "icons": [
+        {
+            "src": "/icons/icons8-chat-48.png",
+            "sizes": "48x48",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/icons8-chat-96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/icons8-chat-100.png",
+            "sizes": "100x100",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/icons8-chat-color-16.png",
+            "sizes": "16x16",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/icons8-chat-color-96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#000000"
+}
