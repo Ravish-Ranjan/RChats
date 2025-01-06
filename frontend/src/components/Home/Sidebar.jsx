@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useChatStore } from "../../store/useChatStore";
 import { useAuthStore } from "../../store/useAuthStore";
-import { User } from "@blueprintjs/icons";
 import { Button, Checkbox } from "@blueprintjs/core";
 import PropTypes from "prop-types";
 
@@ -9,7 +8,7 @@ function Sidebar({ addToast }) {
     const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } =
         useChatStore();
     const [showOnline, setShowOnline] = useState(false);
-    const { onlineUsers } = useAuthStore();
+    const { onlineUsers,user } = useAuthStore();
 
     useEffect(() => {
         getUsers(addToast);
@@ -28,7 +27,14 @@ function Sidebar({ addToast }) {
         >
             <div className="border-b border-gray-300 w-full p-5">
                 <div className="flex items-center gap-3">
-                    <User className="" size={30} color="#5F6B7C" />
+                    <img
+                        src={
+                            user.profilepic ||
+                            "https://api.iconify.design/material-symbols:account-circle.svg?color=%23888888"
+                        }
+                        alt="Profile Pic"
+                        className="size-12 object-cover rounded-full ring-4 ring-indigo-500"
+                    />
                     <span className="text-xl font-medium hidden lg:block">
                         Contacts
                     </span>
@@ -87,7 +93,9 @@ function Sidebar({ addToast }) {
                     );
                 })}
                 {filterdUser.length === 0 && (
-                    <span className="text-center font-semibold mx-auto text-gray-700">No Online Users</span>
+                    <span className="text-center font-semibold mx-auto text-gray-700">
+                        No Online Users
+                    </span>
                 )}
             </div>
         </aside>

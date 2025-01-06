@@ -12,6 +12,7 @@ import {
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store/useAuthStore";
+import logo from "../../assets/logo.png";
 
 function Nav({ toasts, toaster, addToast }) {
     const { user, logout } = useAuthStore();
@@ -28,9 +29,12 @@ function Nav({ toasts, toaster, addToast }) {
         >
             <Navbar.Heading
                 onClick={() => navigate("/")}
-                className="cursor-pointer mr-auto font-semibold"
+                className="cursor-pointer mr-auto font-semibold flex justify-center items-center"
             >
-                Blueprint
+                <img src={logo} alt="RChats-logo" className="size-12 " />
+                <span className="text-2xl">
+                    <span className="text-indigo-800">R</span>Chats
+                </span>
             </Navbar.Heading>
             {user ? (
                 <>
@@ -91,11 +95,7 @@ function Nav({ toasts, toaster, addToast }) {
                     />
                 </>
             )}
-            <OverlayToaster
-                position={Position.TOP}
-                ref={toaster}
-                maxToasts={5}
-            >
+            <OverlayToaster position={Position.TOP} ref={toaster} maxToasts={5}>
                 {toasts.map((toast) => (
                     <Toast2 key={toast.key} {...toast} minimal={true} />
                 ))}

@@ -57,28 +57,6 @@ body,
         z-index: -1;
     }
 }
-.burping {
-    animation: burp 2s linear infinite;
-}
-.burping:nth-of-type(2),
-.burping:nth-of-type(4) {
-    animation-delay: 0.3s;
-}
-
-.burping:nth-of-type(3),
-.burping:nth-of-type(5),
-.burping:nth-of-type(7) {
-    animation-delay: 0.6s;
-}
-
-.burping:nth-of-type(6),
-.burping:nth-of-type(8) {
-    animation-delay: 0.9s;
-}
-
-.burping:nth-of-type(9) {
-    animation-delay: 1.2s;
-}
 .button-text-full > span {
     width: 100% !important;
     display: flex;
@@ -86,7 +64,7 @@ body,
     align-items: center;
     gap: 0.5rem;
 }
-.button-text-full.bg-gray-300  {
+.button-text-full.bg-gray-300 {
     --tw-bg-opacity: 1;
     background-color: hsl(278, 8%, 80%);
 }
