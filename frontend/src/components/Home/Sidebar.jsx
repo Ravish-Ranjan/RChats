@@ -8,7 +8,7 @@ function Sidebar({ addToast }) {
     const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } =
         useChatStore();
     const [showOnline, setShowOnline] = useState(false);
-    const { onlineUsers,user } = useAuthStore();
+    const { onlineUsers, user } = useAuthStore();
 
     useEffect(() => {
         getUsers(addToast);
@@ -45,7 +45,11 @@ function Sidebar({ addToast }) {
                         <Checkbox
                             onChange={(e) => setShowOnline(e.target.checked)}
                         >
-                            Show Online Only ({onlineUsers.length - 1} online)
+                            Show Online Only (
+                            {onlineUsers.length > 0
+                                ? onlineUsers.length - 1
+                                : 0}{" "}
+                            online)
                         </Checkbox>
                     </label>
                 </div>

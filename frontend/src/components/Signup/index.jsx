@@ -47,15 +47,15 @@ function Signup({ addToast }) {
 
     return (
         <div
-            className="h-full w-full flex flex-row-reverse justify-evenly items-center bg-indigo-300 relative"
+            className="relative flex flex-row-reverse items-center w-full h-full bg-indigo-300 justify-evenly"
             style={{ height: "calc(100dvh - 4rem)" }}
         >
             <form
                 method="post"
-                className="h-5/6 bg-gray-200 mx-10 p-2 flex flex-col gap-6 rounded-xl"
+                className="flex flex-col gap-6 p-2 mx-10 bg-gray-200 h-5/6 rounded-xl"
                 style={{ aspectRatio: "3/4" }}
             >
-                <span className="text-3xl mt-4 font-semibold">Register</span>
+                <span className="mt-4 text-3xl font-semibold">Register</span>
                 <div className="grid">
                     <FormGroup
                         label="Full Name"
