@@ -5,6 +5,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import fileUpload from "express-fileupload";
 import path from "path";
+import helmet from "helmet"
 
 import authRouter from "./routers/auth.router.js";
 import messageRouter from "./routers/message.router.js";
@@ -13,6 +14,13 @@ import { app, server } from "./libs/socket.js";
 
 dotenv.config();
 
+app.use(
+	helmet({
+		hidePoweredBy: true,
+		noSniff: true,
+		xssFilter: true,
+	})
+);
 app.use(express.json({ limit: "50mb" }));
 app.use(
     cors({
